@@ -16,7 +16,21 @@ button {
 .hide {
     display: none;
 }
-
+._lock{
+    height: 100%;
+    overflow: hidden;
+}
+.error-auth{
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 15px;
+    background: red;
+    color: white;
+    margin-right: 10px;
+    margin-top: 10px;
+    z-index: 9999;
+}
 .container {
     max-width: 1200px;
     margin: auto;

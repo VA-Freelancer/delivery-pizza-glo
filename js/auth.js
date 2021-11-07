@@ -1,27 +1,25 @@
+import openModal from "./module/openModal.js";
 const buttonAuth = document.querySelector('.button-auth');
 const modalAuth = document.querySelector('.modal-auth');
 const logInForm = document.getElementById('logInForm');
 const buttonOut = document.querySelector('.button-out');
 const userName = document.querySelector('.user-name');
-
 const inputLogin = document.getElementById('login');
 const inputPassword = document.getElementById('password');
 let currentInputChar = true;
-
+let valueReplaceTrim;
 // функция логина
 const login = (user)=>{
+
     // скрываем после авторизации
     buttonAuth.style.display = 'none';
     // показываем кнопку после авторизации
     buttonOut.style.display = 'flex';
     // показываем логин поле и передаем текст с формы
-    userName.textContent = user.login
+    userName.textContent = user.login;
     userName.style.display = 'flex';
     //закрываем модальное окно
     closeModal(modalAuth);
-}
-const closeModal = (modal) =>{
-    modal.style.display = 'none';
 }
 // функция пароля
 const logout = ()=>{
@@ -33,11 +31,24 @@ const logout = ()=>{
     userName.style.display = 'none';
     userName.textContent = "";
     localStorage.removeItem('user');
+    if(localStorage.getItem('restaurant')){
+        localStorage.removeItem('restaurant');
+    }
+    window.location.href = `./`
 }
+
+// закрытие модального окна
+const closeModal = (modal) =>{
+    modal.style.display = 'none';
+    document.body.classList.remove("_lock", '_fixed-modal');
+    document.documentElement.classList.remove('_fixed-modal');
+}
+
 // показываем показываек окно авторизации
 buttonAuth.addEventListener('click', ()=>{
-    modalAuth.style.display = 'flex';
+    openModal(modalAuth);
 })
+// убираем авторизацию
 buttonOut.addEventListener('click', ()=>{
     logout();
 })
@@ -49,6 +60,7 @@ modalAuth.addEventListener('click', (e)=>{
     }
 
 })
+// при кнопке esc закрываем модальное окно
 document.addEventListener('keyup' ,(e)=>{
     if(e["keyCode"] === 27 && modalAuth.style.display === "flex"){
         closeModal(modalAuth);
@@ -64,8 +76,11 @@ logInForm.addEventListener('input', (e)=>{
     }
 
 })
+
 // функция для вывода ошибок
 function validate(input) {
+    valueReplaceTrim = input.value.replace(/[^a-zA-Z0-9]/g, '').replace(/\s/g, '');
+    input.value = valueReplaceTrim;
     if (input.value.length < 3 && input.value.length !== 0) {
         input.setCustomValidity('Поле логина содержит меньше трех символов.');
         currentInputChar = false;
@@ -84,8 +99,9 @@ function validate(input) {
 // получаем данные с формы авторизации и получаем данные
 logInForm.addEventListener('submit', (event)=>{
     event.preventDefault();
+    const strSubmit = inputLogin.value.replace(/[^a-zA-Z0-9]/g, '').replace(/\s/g, '').trim();
     // проверка на пустое поле и количество введенных символов
-    if(inputLogin.value.length !== 0 && inputLogin.value !== '' && currentInputChar){
+    if(strSubmit.length !== 0 && strSubmit !== '' && currentInputChar){
         const user = {
             login: inputLogin.value,
             password: inputPassword.value,

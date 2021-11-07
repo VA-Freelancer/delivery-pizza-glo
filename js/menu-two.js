@@ -1,40 +1,55 @@
-// получаем моудуль
-import createElement from './module/createElement.js';
+// создаем переменную со значением категории в базе данных
+import createElement from "./module/createElement.js";
 import changeTitle from './module/changeTitle.js';
 
 
+// получаем обертку для карточек в меню
 const cardMenu = document.querySelector('.cards-menu');
 // функционально обробатываем данные из базы(формат json)
 const renderItems = (data) => {
     if(data.length > 0 ){
         data.forEach(({id, name, description, price, image})=>{
-            const card = createElement('div', ['card'])
+            const card = createElement('div', ['card']);
+
             card.dataset.id = id;
-            card.innerHTML = `
-                    <img src="${image}" alt="${name}" class="card-image" />
-                    <div class="card-text">
-                        <div class="card-heading">
-                        <h3 class="card-title card-title-reg">Пицца Везувий</h3>
-                    </div>
-                    <div class="card-info">
-                        <div class="ingredients">
-                        ${description}
-                        </div>
-                    </div>
-                    <div class="card-buttons">
-                            <button class="button button-primary button-add-cart">
-                                <span class="button-card-text">В корзину</span>
-                                <span class="button-cart-svg"></span>
-                            </button>
-                            <strong class="card-price-bold">${price} ₽</strong>
-                        </div>
-                    </div>
-                `;
-            cardMenu.append(card);
+            const cardImage = createElement('img', ['card-image'],
+                {
+                    src: `${image}`,
+                    alt: `${name}`,
+                });
+            const cardText = createElement('div', ['card-text'], );
+            const cardHeading = createElement('div', ['card-heading']);
+            const cardTitle = createElement('h3', ['card-title', 'card-title-reg'],{
+                innerText: `${name}`
+            });
+            const cardInfo = createElement('div', ['card-info']);
+            const ingredients = createElement('div', ['ingredients'],
+                {
+                    innerText: `${description}`
+                });
+            const cardButtons = createElement('div', ['card-buttons']);
+            const buttonAddCart = createElement('div', ['button', 'button-primary', 'button-add-cart']);
+            const buttonCardText = createElement('span', ['button-card-text'], {
+                innerText: 'В корзину'
+            });
+            const buttonCartSvg = createElement('span', ['button-cart-svg']);
+            const cardPriceBold = createElement('strong', ['card-price-bold'], {
+                innerText: `${price}  ₽`
+            });
+
+            buttonAddCart.append(buttonCardText, buttonCartSvg );
+            cardButtons.append(buttonAddCart, cardPriceBold );
+            cardInfo.append(ingredients);
+            cardHeading.append(cardTitle);
+            cardText.append(cardHeading, cardInfo, cardButtons);
+            card.append(cardImage, cardText);
+            if(typeof cardMenu !== 'undefined'){
+                cardMenu.append(card);
+            }
         })
     }else{
         if(data){
-            console.log(data);
+            console.log("data", "не получает");
         }
     }
 }

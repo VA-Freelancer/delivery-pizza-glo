@@ -16,7 +16,7 @@ const menu = () =>{
                     <img src="${image}" alt="${name}" class="card-image" />
                     <div class="card-text">
                         <div class="card-heading">
-                        <h3 class="card-title card-title-reg">Пицца Везувий</h3>
+                        <h3 class="card-title card-title-reg">${name}</h3>
                     </div>
                     <div class="card-info">
                         <div class="ingredients">

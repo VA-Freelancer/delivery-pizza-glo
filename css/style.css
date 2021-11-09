@@ -852,3 +852,17 @@ button {
         margin-right: 0;
     }
 }
+.button-cart{
+    position: relative;
+}
+.button-cart span.label-prod{
+    background: #262626;
+    display: flex;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 3px;
+    color: #fff;
+    flex-shrink: 0;
+}

@@ -6,14 +6,15 @@ const addToCart = (cartItem) =>{
         cartArray.map((item=>{
             if(item.id === cartItem.id){
                 item.count++;
+
             }
             return item;
         }))
-        console.log('уже есть')
     }else {
         cartArray.push(cartItem);
-    }
 
+    }
+    console.log(cartArray.length)
     localStorage.setItem('cart', JSON.stringify(cartArray))
 }
 export default addToCart;

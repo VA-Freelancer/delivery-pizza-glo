@@ -6,7 +6,7 @@ const addToCart = (cartItem) =>{
         cartArray.map((item=>{
             if(item.id === cartItem.id){
                 item.count++;
-
+                item.sum = (item.count * item.price);
             }
             return item;
         }))
@@ -14,7 +14,7 @@ const addToCart = (cartItem) =>{
         cartArray.push(cartItem);
 
     }
-    console.log(cartArray.length)
-    localStorage.setItem('cart', JSON.stringify(cartArray))
+    // console.log(cartArray.length);
+    localStorage.setItem('cart', JSON.stringify(cartArray));
 }
 export default addToCart;

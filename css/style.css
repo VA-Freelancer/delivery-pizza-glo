@@ -1,9 +1,65 @@
+@import 'normalize.css';
+@import 'https://unpkg.com/swiper@7/swiper-bundle.min.css';
+:root {
+    --bg-color-main: #e5e5e5;
+    --color-font-main: #000;
+    --color-style-gray: #333333;
+    --color-ui-link: #33a4fb;
+    --color-style-blue: #33a4fb;
+    --color-style-beige: #f6f6f6;
+    --color-link-header-top: #fff;
+    --color-mobile-link: #fff;
+    --color-humburger: #fff;
+    --color-button-font: #fff;
+    --color-button-background: #fff;
+    --color-popup-background: #33a4fb;
+    --base-fonts: 1rem;
+    --inner-marg-bott-elem: 20px;
+    --margin-output-section: 90px;
+    --blue: #46AAFB;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+    --white: #fff;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #007bff;
+    --secondary: #6c757d;
+    --success: #28a745;
+    --info: #249eff;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --light: #f8f9fa;
+    --dark: #343a40;
+    --dark-blue: #002848;
+    --fg: #17181c;
+    --shade1: var(--dark-blue), #727274;
+    --shade2: #cccdd1;
+    --shade3: #f3f4f8;
+    --shade4: #ffffff;
+    --dur1: 1s;
+    --dur2: 6s;
+    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --col-count: 0;
+    --col-width: 0;
+    --gap-width: 0;
+    --max-col-width: calc(var(--col-count) * (var(--col-width) + var(--gap-width)) - var(--gap-width));
+    --side-offset: calc((100vw - var(--max-col-width)) / 2);
+}
 * {
     box-sizing: border-box;
 }
 
 body {
-    font-family: "Roboto", sans-serif;
+    font-family: var(--font-family-sans-serif), "Roboto", sans-serif;
     padding-top: 44px;
 }
 
@@ -42,7 +98,30 @@ button {
     justify-content: space-between;
     margin-bottom: 40px;
 }
-
+.swiper{
+    background-color: transparent !important;
+}
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    display: none;
+    height: 24px;
+    width: 24px;
+    /*font-size: 24px;*/
+}
+.swiper-button-prev,
+.swiper-button-next {
+    color: #000;
+    /*font-size: 24px;*/
+}
+.swiper-button-prev:active,
+.swiper-button-next:active {
+    color: #fff;
+    /*font-size: 24px;*/
+}
+.swiper-button-prev i,
+.swiper-button-next i {
+    font-size: 36px;
+}
 .input {
     background-color: #ffffff;
     border: 1px solid #d9d9d9;
@@ -92,7 +171,7 @@ button {
     line-height: 24px;
 }
 
-.button:hover {
+.button:not(.button-add-cart):hover {
     background: #1890ff;
     border: 1px solid #1890ff;
     color: #fff;
@@ -106,7 +185,7 @@ button {
     margin-right: 10px;
 }
 
-.button-primary:hover {
+.button-primary:not(.button-add-cart):hover {
     background: #ffffff;
     border: 1px solid #d9d9d9;
     color: #595959;
@@ -133,7 +212,7 @@ button {
     background-repeat: no-repeat;
 }
 
-.button-primary:hover .button-auth-svg {
+.button-primary:not(.button-add-cart):hover .button-auth-svg {
     background-color: #595959;
 }
 
@@ -150,11 +229,11 @@ button {
     background-color: #fff;
 }
 
-.button:hover .button-cart-svg {
+.button:not(.button-add-cart):hover .button-cart-svg {
     background-color: #fff;
 }
 
-.button-primary:hover .button-cart-svg {
+.button-primary:not(.button-add-cart):hover .button-cart-svg {
     background-color: #595959;
 }
 
@@ -173,6 +252,14 @@ button {
     margin-right: 20px;
     font-weight: bold;
     font-size: 18px;
+}
+
+/*.button-add-cart:target{*/
+/*    background-color: var(--cyan);*/
+/*}*/
+
+.button-add-cart:active{
+    background-color: var(--cyan);
 }
 
 .promo-slider {
@@ -250,7 +337,7 @@ button {
 
 .card {
     background: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 7px;
     overflow: hidden;
     margin-bottom: 30px;
@@ -503,7 +590,7 @@ button {
 
 .food-row {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     padding-bottom: 8px;
     border-bottom: 1px solid #d9d9d9;
@@ -523,7 +610,18 @@ button {
     font-size: 20px;
     line-height: 32px;
 }
-
+.food-image{
+    max-width: 40px;
+    /*height: 20px;*/
+    overflow: hidden;
+    margin-left: 5px;
+}
+.food-image img{
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 .food-counter {
     display: flex;
     align-items: center;
@@ -752,6 +850,7 @@ button {
 
     .card {
         flex-basis: 100%;
+
     }
 
     .card-text {
@@ -787,8 +886,61 @@ button {
         order: 2;
     }
 }
-
+.modal-dialog{
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.modal-cart{
+     overflow-x: hidden;
+     overflow-y: auto;
+ }
 @media (max-width: 480px) {
+    .modal{
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .modal-dialog{
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 100%;
+        width: 100%;
+    }
+    .food-row{
+        flex-direction: column;
+    }
+    .food-image{
+        margin: unset;
+        flex-shrink: 0;
+    }
+    .food-image{
+        max-width: 80px;
+        max-height: 80px;
+    }
+
+    element.style {
+    }
+    .swiper-button-prev, .swiper-button-next {
+        color: #000;
+        /* font-size: 24px; */
+    }
+    .swiper-button-prev, .swiper-rtl .swiper-button-next {
+        left: 10px;
+        right: auto;
+    }
+    .swiper-button-next, .swiper-button-prev{
+        top: unset;
+        bottom: 0;
+        transform: translateY(13px);
+    }
+    .swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction{
+        bottom: 5px;
+    }
+    .food-price{
+        margin-left: unset;
+        margin-right: unset;
+    }
     .button-text {
         display: none;
     }

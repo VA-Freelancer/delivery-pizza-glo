@@ -33,7 +33,7 @@ const menu = () =>{
                     </div>
                 `;
                 card.querySelector('.button-card-text').addEventListener('click', ()=>{
-                    addToCart({id, name, price, count: 1 });
+                    addToCart({id, name, price, image, count: 1, sum: price, });
                 })
                 cardMenu.append(card);
             })

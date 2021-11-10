@@ -1,37 +1,50 @@
 import renderItems from "./renderItems.js";
-
-
+import closeModal from "./closeModal.js";
+import sumItem from "./sum.js";
 
 const countItem = (modalCart) =>{
     const modalBody = modalCart.querySelector('.modal-body');
 
     modalBody.addEventListener('click', (e)=>{
         e.preventDefault()
-    const cartArray = JSON.parse(localStorage.getItem('cart'));
+    const cartArray =  localStorage.getItem('cart') ?
+        JSON.parse(localStorage.getItem('cart')) :
+        []
     let newCartArray;
-
-    cartArray.map((item) => {
-        if(item.id === e.target.dataset.index){
+    if(cartArray.length){
+        cartArray.map((item) => {
+            if(item.id === e.target.dataset.index){
 
                 if(e.target.closest('.btn-inc')){
                     item.count++;
-                    console.log(item.count, item.price)
+                    sumItem('plus', cartArray, item)
                 }
                 if(e.target.closest('.btn-dec')){
                     item.count = item.count > 0 ? item.count - 1 : 0;
+                    sumItem('minus', cartArray, item)
                     if(item.count === 0){
-                        newCartArray = cartArray.indexOf(item)
+                        newCartArray = cartArray.indexOf(item);
+                        console.log(cartArray)
+
                     }
                 }
 
+            }
+            return item;
+        })
+    }
+        if(cartArray.some((item)=>item.count === 0)){
+            cartArray.splice(newCartArray, 1)
+            localStorage.setItem('cart', JSON.stringify(cartArray));
         }
-        return item;
-    })
-
-        localStorage.setItem('cart', JSON.stringify(cartArray))
-
-        renderItems(cartArray);
-
+        if(cartArray.length === 0){
+            localStorage.removeItem('cart');
+            closeModal(modalCart)
+            window.location.href = `${window.location.href}`;
+        }else{
+            localStorage.setItem('cart', JSON.stringify(cartArray));
+            renderItems(cartArray);
+        }
     })
 }
 export default countItem;

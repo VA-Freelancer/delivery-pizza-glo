@@ -2,6 +2,7 @@
 import createElement from './createElement.js';
 import changeTitle from './changeTitle.js';
 import addToCart from './addToCart.js';
+import sumItem from './sum.js';
 
 const menu = () =>{
     const cardMenu = document.querySelector('.cards-menu');
@@ -35,6 +36,9 @@ const menu = () =>{
                 card.querySelector('.button-card-text').addEventListener('click', ()=>{
                     addToCart({id, name, price, image, count: 1, sum: price, });
                 })
+                const cartItem = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []
+                const labelSum = createElement('span', ['label-prod'])
+                // sumItem({price, count})
                 cardMenu.append(card);
             })
         }else{

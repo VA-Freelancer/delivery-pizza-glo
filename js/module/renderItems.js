@@ -1,9 +1,11 @@
 import createElement from './createElement.js'
+import sumItem from "./sum.js";
 const modalCart = document.querySelector('.modal-cart');
 const modalBody = modalCart.querySelector('.modal-body');
 
 
 const renderItems = (data) =>{
+    sumItem(data);
     modalBody.innerHTML = '';
     if(data.length > 0){
     data.forEach(({id, name, price, image, count, sum, }) =>{

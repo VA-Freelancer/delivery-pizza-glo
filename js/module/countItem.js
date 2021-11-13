@@ -17,11 +17,11 @@ const countItem = (modalCart) =>{
 
                 if(e.target.closest('.btn-inc')){
                     item.count++;
-                    sumItem('plus', cartArray, item)
+                    sumItem(cartArray);
                 }
                 if(e.target.closest('.btn-dec')){
                     item.count = item.count > 0 ? item.count - 1 : 0;
-                    sumItem('minus', cartArray, item)
+                    sumItem(cartArray);
                     if(item.count === 0){
                         newCartArray = cartArray.indexOf(item);
                         console.log(cartArray)

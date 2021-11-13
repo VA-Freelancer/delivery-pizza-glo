@@ -11,6 +11,7 @@ const buttonSend = modalCart.querySelector('.button-send');
 
 
     cartButton.addEventListener('click', (e)=>{
+
         if(localStorage.getItem('cart')){
             renderItems(JSON.parse(localStorage.getItem('cart')));
         }

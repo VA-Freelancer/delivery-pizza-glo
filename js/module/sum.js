@@ -1,29 +1,18 @@
 
-document.querySelector('.modal-pricetag').innerHTML = 0;
 
-const sum = (operator, cartArray, cartItem) =>{
+const arraySum = []
+const reducer = (previousValue, currentValue) => previousValue + currentValue;
+const sum = (cartArray) =>{
+        console.log(cartArray)
+        cartArray.forEach((el, key, array) => {
+                if(array.length > 0){
+                        arraySum[key] = el.price*el.count;
+                        console.log(arraySum.reduce(reducer));
 
-    if(operator === 'plus'){
-        if(cartArray.some((item)=>item.id === cartItem.id)){
-            cartArray.map((item=>{
-                if(item.id === cartItem.id){
-                    document.querySelector('.modal-pricetag').innerHTML
-                    item.sum = (item.count * item.price);
                 }
-                return item;
-            }))
-        }else {
-            cartArray.push(cartItem);
-
-        }
-    }
-    cartArray.forEach((el, key, arr) =>{
-        console.log(arr[key])
-        localStorage.setItem('item-sum', sum);
+                return document.querySelector('.modal-pricetag').innerHTML = `${arraySum.reduce(reducer)} ₽`;
+        })
 
 
-    })
-    // console.log(cartArray.length);
-    localStorage.setItem('cart', JSON.stringify(cartArray));
 }
 export default sum;

@@ -35,13 +35,17 @@ const countItem = (modalCart) =>{
     }
         if(cartArray.some((item)=>item.count === 0)){
             cartArray.splice(newCartArray, 1)
+
             localStorage.setItem('cart', JSON.stringify(cartArray));
+            sumItem(cartArray);
         }
-        if(cartArray.length === 0){
+        if(cartArray.length === 0)
+            {sumItem(cartArray);
             localStorage.removeItem('cart');
             closeModal(modalCart)
             window.location.href = `${window.location.href}`;
         }else{
+            sumItem(cartArray);
             localStorage.setItem('cart', JSON.stringify(cartArray));
             renderItems(cartArray);
         }

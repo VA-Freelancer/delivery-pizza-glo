@@ -25,7 +25,9 @@ import partners from './module/partners.js'
 import menu from './module/menu.js'
 import cart from './module/cart.js'
 const currentHref = location.pathname.replace(/\/delivery-pizza-glo\/|.html/gi, '')
-
+if(document.querySelector('.modal-pricetag')){
+    document.querySelector('.modal-pricetag').innerHTML = `0 ₽`;
+}
 
 // подключаем авторизацию
 auth();
